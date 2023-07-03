@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CategoriaServiceImpl implements CategoriaService{
+public class CategoriaServiceImpl implements CategoriaService {
     
     @Autowired
     CategoriaDao categoriaDao;
@@ -28,4 +28,26 @@ public class CategoriaServiceImpl implements CategoriaService{
         return categorias;
     }
     
+    @Override
+    @Transactional(readOnly = true)
+    public Categoria getCategoria(Categoria categoria) {
+        return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public void save(Categoria categoria) {
+        categoriaDao.save(categoria);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Categoria categoria) {
+        categoriaDao.delete(categoria);
+    }
+
+    @Override
+    public Categoria getcategoria(Categoria categoria) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
